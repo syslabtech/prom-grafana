@@ -856,17 +856,17 @@ alertmanager:
 grafana:
   grafana.ini:
     smtp:
-      enabled: true
-      host: mx.dynamic1001.com:25
-      user: waprometheusalert@dynamic1001.com
-      password: WA_Prom@2021
+      enabled: false
+      host: ""
+      user: ""
+      password: ""
       skip_verify: true
-      from_address: waprometheusalert@dynamic1001.com
-      from_name: Grafana_WA
+      from_address: ""
+      from_name: Grafana
 
-  enabled: true
+  enabled: false
   persistence:
-    enabled: true
+    enabled: false
     storageClassName: sc-grafana
     accessModes: ["ReadWriteOnce"]
     resources:
@@ -892,7 +892,7 @@ grafana:
   ##
   defaultDashboardsTimezone: utc
 
-  adminPassword: Gy7@U*10gt
+  adminPassword: admin
 
   rbac:
     ## If true, Grafana PSPs will be created
@@ -3232,13 +3232,13 @@ prometheus:
     ## Using PersistentVolumeClaim
 
      disableMountSubPath: true
-     volumeClaimTemplate:
-       spec:
-         storageClassName: sc-prometheus
-         accessModes: ["ReadWriteOnce"]
-         resources:
-           requests:
-             storage: 600Gi
+    #  volumeClaimTemplate:
+    #    spec:
+    #      storageClassName: sc-prometheus
+    #      accessModes: ["ReadWriteOnce"]
+    #      resources:
+    #        requests:
+    #          storage: 600Gi
 
     #  volumeClaimTemplate:
     #    spec:
@@ -3251,7 +3251,7 @@ prometheus:
 
     ## Using tmpfs volume
     ##
-    #  emptyDir:
+     emptyDir: {}
     #    medium: Memory
 
     # Additional volumes on the output StatefulSet definition.
@@ -3319,7 +3319,7 @@ prometheus:
     ## Expected values are the secret name and key
     ## Cannot be used with additionalScrapeConfigs
     additionalScrapeConfigsSecret:
-      enabled: true
+      enabled: false
       name: additional-scrape-configs 
       key: prometheus-additional.yaml
 
@@ -3405,15 +3405,15 @@ prometheus:
 
     ## Containers allows injecting additional containers. This is meant to allow adding an authentication proxy to a Prometheus pod.
     ## if using proxy extraContainer update targetPort with proxy container port
-    containers:
-      - name: prometheus
-        volumeMounts:
-          - name: tikv-cluster-client-secret
-            mountPath: /var/lib/tikv-client-tls
-    volumes:
-      - name: tikv-cluster-client-secret
-        secret:
-          secretName: tikv-monitoring-client-tls 
+    # containers:
+    #   - name: prometheus
+    #     volumeMounts:
+    #       - name: tikv-cluster-client-secret
+    #         mountPath: /var/lib/tikv-client-tls
+    # volumes:
+    #   - name: tikv-cluster-client-secret
+    #     secret:
+    #       secretName: tikv-monitoring-client-tls 
     # containers:
     # - name: oauth-proxy
     #   image: quay.io/oauth2-proxy/oauth2-proxy:v7.3.0
