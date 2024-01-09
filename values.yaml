@@ -3216,7 +3216,7 @@ prometheus:
       - url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
         basicAuth:
           username: 1364607
-          password: W?{"o":"1025887","n":"stack-827506-hm-write-remote_writer","k":"rVmY0108Te732AaA6SdzEM63","m":{"r":"prod-us-east-0"}}
+          password: glc_eyJvIjoiMTAyNTg4NyIsIm4iOiJzdGFjay04Mjc1MDYtaG0td3JpdGUtcmVtb3RlX3dyaXRlciIsImsiOiJyVm1ZMDEwOFRlNzMyQWFBNlNkekVNNjMiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
         name: prometheus-syscore
         writeRelabelConfigs:
         - action: keep
