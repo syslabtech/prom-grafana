@@ -3214,11 +3214,11 @@ prometheus:
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#remotewritespec
     remoteWrite:
       - url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
-        basic_auth:
+        basicAuth:
           username: 1364607
           password: glc_eyJvIjoiMTAyNTg4NyIsIm4iOiJzdGFjay04Mjc1MDYtaG0td3JpdGUtcmVtb3RlX3dyaXRlciIsImsiOiJyVm1ZMDEwOFRlNzMyQWFBNlNkekVNNjMiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
         name: prometheus-syscore
-        write_relabel_configs:
+        writeRelabelConfigs:
         - action: keep
           regex: (grafana_alerting_alerts|grafana_stat_totals_dashboard)
           separator: ','
