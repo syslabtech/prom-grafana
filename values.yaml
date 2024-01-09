@@ -864,7 +864,7 @@ grafana:
       from_address: ""
       from_name: Grafana
 
-  enabled: false
+  enabled: true
   persistence:
     enabled: false
     storageClassName: sc-grafana
@@ -2904,7 +2904,8 @@ prometheus:
 
     # EnableFeatures API enables access to Prometheus disabled features.
     # ref: https://prometheus.io/docs/prometheus/latest/disabled_features/
-    enableFeatures: []
+    enableFeatures: 
+      - remote-write-receiver
     # - exemplar-storage
 
     ## Image of Prometheus.
@@ -2956,7 +2957,7 @@ prometheus:
 
     ## enable --web.enable-remote-write-receiver flag on prometheus-server
     ##
-    enableRemoteWriteReceiver: false
+    enableRemoteWriteReceiver: true
 
     ## Name of the external label used to denote replica name
     ##
@@ -3211,7 +3212,31 @@ prometheus:
 
     ## The remote_write spec configuration for Prometheus.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#remotewritespec
-    remoteWrite: []
+    remoteWrite:
+      - url: https://prometheus-prod-13-prod-us-east-0.grafana.net/api/prom/push
+        basic_auth:
+            username: 1364607
+            password: glc_eyJvIjoiMTAyNTg4NyIsIm4iOiJzdGFjay04Mjc1MDYtaG0td3JpdGUtcmVtb3RlX3dyaXRlciIsImsiOiJyVm1ZMDEwOFRlNzMyQWFBNlNkekVNNjMiLCJtIjp7InIiOiJwcm9kLXVzLWVhc3QtMCJ9fQ==
+        name: prometheus-remote-write
+        write_relabel_configs:
+        - action: keep
+          regex: (grafana_alerting_alerts|grafana_stat_totals_dashboard)
+          separator: ','
+          sourceLabels:
+            - __name__
+          targetLabel: __name__
+        - action: replace
+          regex: grafana_alerting_alerts
+          replacement: era_grafana_alerting_alerts
+          sourceLabels:
+            - __name__
+          targetLabel: __name__
+        - action: replace
+          regex: grafana_stat_totals_dashboard
+          replacement: era_grafana_stat_totals_dashboard
+          sourceLabels:
+            - __name__
+          targetLabel: __name__
     # - url: http://remote1/push
     ## additionalRemoteWrite is appended to remoteWrite
     additionalRemoteWrite: []
