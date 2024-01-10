@@ -3221,7 +3221,7 @@ prometheus:
           password: 
             key: password
             name: auth-secret
-        name: prometheus-syscore
+        name: fr-prometheus-remotewrite
         writeRelabelConfigs:
         - action: keep
           regex: (grafana_alerting_alerts|grafana_stat_totals_dashboard)
